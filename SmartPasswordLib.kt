@@ -1,5 +1,5 @@
 /**
- * SmartPasswordLib v1.0.0 - Kotlin smart password generator
+ * SmartPasswordLib v1.0.1 - Kotlin smart password generator
  * Cross-platform deterministic password generation
  * Same secret + same length = same password across all platforms
  *
@@ -13,6 +13,7 @@
  * - Core library (Python): https://github.com/smartlegionlab/smartpasslib
  * - Core library (JS): https://github.com/smartlegionlab/smartpasslib-js
  * - Core library (Kotlin): https://github.com/smartlegionlab/smartpasslib-kotlin
+ * - Core library (Go): https://github.com/smartlegionlab/smartpasslib-go
  * - Desktop: https://github.com/smartlegionlab/smart-password-manager-desktop
  * - CLI Manager: https://github.com/smartlegionlab/clipassman
  * - CLI Generator: https://github.com/smartlegionlab/clipassgen
@@ -31,7 +32,7 @@ import java.security.SecureRandom
 
 object SmartPasswordLib {
 
-    const val VERSION = "1.0.0"
+    const val VERSION = "1.0.1"
 
     // Character set for password generation (must match other implementations)
     const val CHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$&*-_"

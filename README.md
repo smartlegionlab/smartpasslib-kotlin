@@ -1,4 +1,4 @@
-# SmartPasswordLib Kotlin <sup>v1.0.0</sup>
+# SmartPasswordLib Kotlin <sup>v1.0.1</sup>
 
 **Kotlin implementation of deterministic smart password generator. Same secret + same length = same password across all platforms (Python, JS, Go, Kotlin).**
 
@@ -179,6 +179,7 @@ SmartPasswordLib Kotlin produces **identical passwords** to:
 | Python     | [smartpasslib](https://github.com/smartlegionlab/smartpasslib)                                                            |
 | JavaScript | [smartpasslib-js](https://github.com/smartlegionlab/smartpasslib-js)                                                      |
 | Kotlin     | [smartpasslib-kotlin](https://github.com/smartlegionlab/smartpasslib-kotlin)                                              |
+| Go         | [smartpasslib-go](https://github.com/smartlegionlab/smartpasslib-go)                                                      |
 | Web        | [Web Manager](https://github.com/smartlegionlab/smart-password-manager-web)                                               |
 | Android    | [Android Manager](https://github.com/smartlegionlab/smart-password-manager-android)                                       |
 | Desktop    | [Desktop Manager](https://github.com/smartlegionlab/smart-password-manager-desktop)                                       |
@@ -202,6 +203,7 @@ kotlin test.kts
 - **[smartpasslib](https://github.com/smartlegionlab/smartpasslib)** - Python implementation
 - **[smartpasslib-js](https://github.com/smartlegionlab/smartpasslib-js)** - JavaScript implementation
 - **[smartpasslib-kotlin](https://github.com/smartlegionlab/smartpasslib-kotlin)** - Kotlin implementation
+- **[smartpasslib-go](https://github.com/smartlegionlab/smartpasslib-go)** - Golang implementation
 
 **Applications:**
 - **[Desktop Manager](https://github.com/smartlegionlab/smart-password-manager-desktop)** - Cross-platform desktop app
