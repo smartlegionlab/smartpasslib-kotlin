@@ -1,4 +1,4 @@
-# SmartPasswordLib Kotlin <sup>v1.0.1</sup>
+# Smart Passwords Library Kotlin <sup>v1.0.2</sup>
 
 **Kotlin implementation of deterministic smart password generator. Same secret + same length = same password across all platforms (Python, JS, Go, Kotlin).**
 
@@ -155,6 +155,7 @@ val code = SmartPasswordLib.generateCode(8)
 - Case-sensitive
 - Use mix of: uppercase, lowercase, numbers, symbols, emoji, or Cyrillic
 - Never store digitally
+- **NEVER use your password description as secret phrase**
 
 ### Strong Secret Examples
 ```
@@ -172,7 +173,7 @@ val code = SmartPasswordLib.generateCode(8)
 
 ## Cross-Platform Compatibility
 
-SmartPasswordLib Kotlin produces **identical passwords** to:
+Smart Passwords Library Kotlin produces **identical passwords** to:
 
 | Platform   | Repository                                                                                                                |
 |------------|:--------------------------------------------------------------------------------------------------------------------------|
@@ -227,7 +228,7 @@ Copyright (©) 2026, [Alexander Suvorov](https://github.com/smartlegionlab)
 ## Support
 
 - **Issues**: [GitHub Issues](https://github.com/smartlegionlab/smartpasslib-kotlin/issues)
-- **Documentation**: This README
+- **Documentation**: This [README](README.md)
 
 ---
 

@@ -1,5 +1,5 @@
 /**
- * SmartPasswordLib v1.0.1 - Kotlin smart password generator
+ * Smart Passwords Library v1.0.2 - Kotlin smart password generator
  * Cross-platform deterministic password generation
  * Same secret + same length = same password across all platforms
  *
@@ -9,7 +9,7 @@
  * - Private key: 30 iterations of SHA-256 (used for password generation)
  * - Public key: 60 iterations of SHA-256 (used for verification, stored on server)
  *
- * Part of Smart Password Suite:
+ * Ecosystem:
  * - Core library (Python): https://github.com/smartlegionlab/smartpasslib
  * - Core library (JS): https://github.com/smartlegionlab/smartpasslib-js
  * - Core library (Kotlin): https://github.com/smartlegionlab/smartpasslib-kotlin
@@ -32,7 +32,7 @@ import java.security.SecureRandom
 
 object SmartPasswordLib {
 
-    const val VERSION = "1.0.1"
+    const val VERSION = "1.0.2"
 
     // Character set for password generation (must match other implementations)
     const val CHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$&*-_"
