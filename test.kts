@@ -4,7 +4,7 @@ import java.security.MessageDigest
 import java.security.SecureRandom
 
 // ============================================================
-// Smart Passwords Library
+// SmartPassLib
 // ============================================================
 
 val CHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$&*-_"

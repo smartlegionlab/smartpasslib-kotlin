@@ -1,4 +1,4 @@
-# Smart Passwords Library Kotlin <sup>v1.0.2</sup>
+# SmartPassLib Kotlin <sup>v1.0.3</sup>
 
 **Kotlin implementation of deterministic smart password generator. Same secret + same length = same password across all platforms (Python, JS, Go, Kotlin).**
 
@@ -68,19 +68,19 @@
 
 ## Installation
 
-Copy `SmartPasswordLib.kt` to your project.
+Copy `SmartPassLib.kt` to your project.
 
 ## Quick Usage
 
 ### Generate Smart Password
 ```kotlin
-import com.smartlegionlab.smartpasslib.SmartPasswordLib
+import com.smartlegionlab.smartpasslib.SmartPassLib
 
 fun main() {
     val secret = "MyCatHippo2026"
     val length = 16
     
-    val password = SmartPasswordLib.generateSmartPassword(secret, length)
+    val password = SmartPassLib.generateSmartPassword(secret, length)
     println(password) // e.g., "jrh_E5V!2#neNjnP"
 }
 ```
@@ -89,8 +89,8 @@ fun main() {
 ```kotlin
 val secret = "MyCatHippo2026"
 
-val publicKey = SmartPasswordLib.generatePublicKey(secret)
-val privateKey = SmartPasswordLib.generatePrivateKey(secret)
+val publicKey = SmartPassLib.generatePublicKey(secret)
+val privateKey = SmartPassLib.generatePrivateKey(secret)
 
 println("Public Key (store on server): $publicKey")
 println("Private Key (never store): $privateKey")
@@ -101,22 +101,22 @@ println("Private Key (never store): $privateKey")
 val secret = "MyCatHippo2026"
 val storedPublicKey = "..." // from server
 
-val isValid = SmartPasswordLib.verifySecret(secret, storedPublicKey)
+val isValid = SmartPassLib.verifySecret(secret, storedPublicKey)
 if (isValid) {
-    val password = SmartPasswordLib.generateSmartPassword(secret, 16)
+    val password = SmartPassLib.generateSmartPassword(secret, 16)
 }
 ```
 
 ### Generate Random Passwords
 ```kotlin
 // Strong random (cryptographically secure)
-val strong = SmartPasswordLib.generateStrongPassword(20)
+val strong = SmartPassLib.generateStrongPassword(20)
 
 // Base random
-val base = SmartPasswordLib.generateBasePassword(16)
+val base = SmartPassLib.generateBasePassword(16)
 
 // Authentication code (4-20 chars)
-val code = SmartPasswordLib.generateCode(8)
+val code = SmartPassLib.generateCode(8)
 ```
 
 ## API Reference
@@ -173,7 +173,7 @@ val code = SmartPasswordLib.generateCode(8)
 
 ## Cross-Platform Compatibility
 
-Smart Passwords Library Kotlin produces **identical passwords** to:
+SmartPassLib Kotlin produces **identical passwords** to:
 
 | Platform   | Repository                                                                                                                |
 |------------|:--------------------------------------------------------------------------------------------------------------------------|
