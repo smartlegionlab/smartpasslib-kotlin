@@ -1,6 +1,16 @@
-# SmartPassLib Kotlin <sup>v1.0.3</sup>
+# SmartPassLib Kotlin <sup>v1.0.4</sup>
 
-**Kotlin implementation of deterministic smart password generator. Same secret + same length = same password across all platforms (Python, JS, Go, Kotlin).**
+---
+
+**Smart Passwords Library**: Cryptographic password generation and management without storage. 
+Generate passwords from secrets, verify knowledge without exposure, manage metadata securely.
+
+**Now with Cross-Platform Determinism**: Same secret + same parameters = identical password on 
+**Kotlin, C#, Python, Go, JavaScript** and any language with SHA-256.
+
+**Decentralized by Design**: Unlike traditional password managers that store encrypted vaults on central servers, 
+smartpasslib stores nothing. Your secrets never leave your device. Passwords are regenerated on-demand — 
+**no cloud, no database, no trust required**.
 
 ---
 
@@ -18,32 +28,37 @@
 
 **Summary:** Software provided "AS IS" without warranty. You assume all risks.
 
-**Full legal disclaimer:** See [DISCLAIMER.md](https://github.com/smartlegionlab/smart-password-manager/blob/master/DISCLAIMER.md)
+**Full legal disclaimer:** See [DISCLAIMER.md](https://github.com/smartlegionlab/smartpasslib-kotlin/blob/master/DISCLAIMER.md)
 
 ---
 
 ## Core Principles
 
-- **Deterministic Generation**: Same secret + same length = same password, every time
-- **Zero Storage**: Passwords exist only when generated, never stored
-- **Cross-Platform**: Compatible with Python, JS, Go implementations
-- **JVM/Android Ready**: Works on any Kotlin platform
+- **Zero-Storage Security**: No passwords or secret phrases are ever stored or transmitted
+- **Decentralized Architecture**: No central servers, no cloud dependency, no third-party trust required
+- **Cross-Platform Deterministic Generation**: Identical secret + parameters = identical password **on any language** (SHA-256 based)
+- **Metadata Only**: Store only verification metadata (public keys, descriptions, lengths)
+- **On-Demand Regeneration**: Passwords are recalculated when needed, never retrieved from storage
+- **Cryptographically Secure**: Uses SHA-256 and SecureRandom
 
 ## Key Features
 
+- **Decentralized & Serverless**: No central database, no cloud lock-in, complete user sovereignty
 - **Smart Password Generation**: Deterministic from secret phrase
 - **Public/Private Key System**: 30 iterations for private key, 60 for public key
 - **Secret Verification**: Verify secret without exposing it
 - **Random Password Generation**: Cryptographically secure random passwords
 - **Authentication Codes**: Short codes for 2FA/MFA (4-20 chars)
 - **No External Dependencies**: Pure Kotlin, uses standard crypto
+- **JVM/Android Ready**: Works on any Kotlin platform
 
 ## Security Model
 
 - **Proof of Knowledge**: Public keys verify secrets without exposing them
-- **Deterministic Certainty**: Mathematical certainty in password regeneration
-- **Ephemeral Passwords**: Passwords exist only in memory during generation
-- **Local Computation**: No data leaves your device
+- **Decentralized Trust**: No third party needed — you control your secrets completely
+- **Deterministic Security**: Same input = same output, always reproducible across platforms
+- **No Vulnerable Metadata Storage**: Only public keys and descriptions can be stored (optional)
+- **Zero Storage of Secrets**: Secret phrases exist only in your memory, private keys are derived on-demand and never persisted
 - **No Recovery Backdoors**: Lost secret = permanently lost passwords (by design)
 
 ---
@@ -57,14 +72,20 @@
 
 ## Technical Foundation
 
-**Key derivation (same as Python/JS/Go versions):**
+**Key derivation (same as Python/JS/Go/C# versions):**
 
-| Key Type    | Iterations | Purpose                            |
-|-------------|------------|------------------------------------|
-| Private Key | 30         | Password generation (never stored) |
-| Public Key  | 60         | Verification (stored on server)    |
+| Key Type    | Iterations | Purpose                                                 |
+|-------------|------------|---------------------------------------------------------|
+| Private Key | 30         | Password generation (never stored, never transmitted)   |
+| Public Key  | 60         | Verification (stored locally)                           |
 
 **Character Set:** `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$&*-_`
+
+**Decentralized Architecture**:
+- No central authority required
+- Metadata can be synced via any channel (USB, cloud, even paper)
+- Your security depends only on your secret phrase, not on any service provider
+- Works offline — no internet connection required
 
 ## Installation
 
@@ -77,7 +98,7 @@ Copy `SmartPassLib.kt` to your project.
 import com.smartlegionlab.smartpasslib.SmartPassLib
 
 fun main() {
-    val secret = "MyCatHippo2026"
+    val secret = "MyStrongSecretPhrase2026!"
     val length = 16
     
     val password = SmartPassLib.generateSmartPassword(secret, length)
@@ -87,19 +108,19 @@ fun main() {
 
 ### Generate Public/Private Keys
 ```kotlin
-val secret = "MyCatHippo2026"
+val secret = "MyStrongSecretPhrase2026!"
 
 val publicKey = SmartPassLib.generatePublicKey(secret)
 val privateKey = SmartPassLib.generatePrivateKey(secret)
 
-println("Public Key (store on server): $publicKey")
+println("Public Key (store locally): $publicKey")
 println("Private Key (never store): $privateKey")
 ```
 
 ### Verify Secret Against Public Key
 ```kotlin
-val secret = "MyCatHippo2026"
-val storedPublicKey = "..." // from server
+val secret = "MyStrongSecretPhrase2026!"
+val storedPublicKey = "..." // from local
 
 val isValid = SmartPassLib.verifySecret(secret, storedPublicKey)
 if (isValid) {
@@ -142,11 +163,11 @@ val code = SmartPassLib.generateCode(8)
 
 ### Input Validation
 
-| Parameter | Minimum | Maximum |
-|-----------|---------|---------|
-| Secret phrase | 12 chars | unlimited |
+| Parameter       | Minimum  | Maximum    |
+|-----------------|----------|------------|
+| Secret phrase   | 12 chars | unlimited  |
 | Password length | 12 chars | 1000 chars |
-| Code length | 4 chars | 20 chars |
+| Code length     | 4 chars  | 20 chars   |
 
 ## Security Requirements
 
@@ -159,63 +180,68 @@ val code = SmartPassLib.generateCode(8)
 
 ### Strong Secret Examples
 ```
-✅ "MyCatHippo2026"          — mixed case + numbers
-✅ "P@ssw0rd!LongSecret"     — special chars + numbers + length
-✅ "КотБегемот2026НаДиете"   — Cyrillic + numbers
+✅ "MyStrongSecretPhrase2026!"   — mixed case + numbers + symbols
+✅ "P@ssw0rd!LongSecret"         — special chars + numbers + length
+✅ "КотБегемот2026НаДиете"       — Cyrillic + numbers
 ```
 
 ### Weak Secret Examples (avoid)
 ```
-❌ "password"                — dictionary word, too short
-❌ "1234567890"              — only digits, too short
-❌ "qwerty123"               — keyboard pattern
+❌ "GitHub Account"              — using description as secret (weak!)
+❌ "password"                    — dictionary word, too short
+❌ "1234567890"                  — only digits, too short
+❌ "qwerty123"                   — keyboard pattern
+❌ Same as description           — never use the same value as password description
 ```
 
-## Cross-Platform Compatibility
+### Decentralized Nature
 
+**There is no "forgot password" button.** This is by design:
+
+- No central server can reset your passwords
+- No support team can recover your access
+- Your secret phrase is the ONLY key
+
+**This is the price of true decentralization** — you are completely in control.
+
+## Cross-Platform Implementations
+
+The same deterministic algorithm is available in multiple languages.
 SmartPassLib Kotlin produces **identical passwords** to:
 
-| Platform   | Repository                                                                                                                |
-|------------|:--------------------------------------------------------------------------------------------------------------------------|
-| Python     | [smartpasslib](https://github.com/smartlegionlab/smartpasslib)                                                            |
-| JavaScript | [smartpasslib-js](https://github.com/smartlegionlab/smartpasslib-js)                                                      |
-| Kotlin     | [smartpasslib-kotlin](https://github.com/smartlegionlab/smartpasslib-kotlin)                                              |
-| Go         | [smartpasslib-go](https://github.com/smartlegionlab/smartpasslib-go)                                                      |
-| Web        | [Web Manager](https://github.com/smartlegionlab/smart-password-manager-web)                                               |
-| Android    | [Android Manager](https://github.com/smartlegionlab/smart-password-manager-android)                                       |
-| Desktop    | [Desktop Manager](https://github.com/smartlegionlab/smart-password-manager-desktop)                                       |
-| CLI        | [CLI PassMan](https://github.com/smartlegionlab/clipassman) / [CLI PassGen](https://github.com/smartlegionlab/clipassgen) |
-
-## Testing
-
-### Install Kotlin
-
-
-Arch Linux: `sudo pacman -S kotlin`
-
-Run the test script:
-```bash
-kotlin test.kts
-```
+| Language   | Repository                                                                   |
+|------------|:-----------------------------------------------------------------------------|
+| Python     | [smartpasslib](https://github.com/smartlegionlab/smartpasslib)               |
+| JavaScript | [smartpasslib-js](https://github.com/smartlegionlab/smartpasslib-js)         |
+| Go         | [smartpasslib-go](https://github.com/smartlegionlab/smartpasslib-go)         |
+| C#         | [smartpasslib-csharp](https://github.com/smartlegionlab/smartpasslib-csharp) |
 
 ## Ecosystem
 
 **Core Libraries:**
-- **[smartpasslib](https://github.com/smartlegionlab/smartpasslib)** - Python implementation
-- **[smartpasslib-js](https://github.com/smartlegionlab/smartpasslib-js)** - JavaScript implementation
-- **[smartpasslib-kotlin](https://github.com/smartlegionlab/smartpasslib-kotlin)** - Kotlin implementation
-- **[smartpasslib-go](https://github.com/smartlegionlab/smartpasslib-go)** - Golang implementation
+- **[smartpasslib](https://github.com/smartlegionlab/smartpasslib)** - Python
+- **[smartpasslib-js](https://github.com/smartlegionlab/smartpasslib-js)** - JavaScript
+- **[smartpasslib-kotlin](https://github.com/smartlegionlab/smartpasslib-kotlin)** - Kotlin (this)
+- **[smartpasslib-go](https://github.com/smartlegionlab/smartpasslib-go)** - Go
+- **[smartpasslib-csharp](https://github.com/smartlegionlab/smartpasslib-csharp)** - C#
 
-**Applications:**
-- **[Desktop Manager](https://github.com/smartlegionlab/smart-password-manager-desktop)** - Cross-platform desktop app
-- **[CLI PassMan](https://github.com/smartlegionlab/clipassman)** - Console password manager
-- **[CLI PassGen](https://github.com/smartlegionlab/clipassgen)** - Console password generator
-- **[Web Manager](https://github.com/smartlegionlab/smart-password-manager-web)** - Web interface
-- **[Android Manager](https://github.com/smartlegionlab/smart-password-manager-android)** - Mobile Android app
+**CLI Applications:**
+- **[CLI PassMan (Python)](https://github.com/smartlegionlab/clipassman)**
+- **[CLI PassGen (Python)](https://github.com/smartlegionlab/clipassgen)**
+- **[CLI Manager (C#)](https://github.com/smartlegionlab/SmartPasswordManagerCsharpCli)**
+- **[CLI Generator (C#)](https://github.com/smartlegionlab/SmartPasswordGeneratorCsharpCli)** 
+
+**Desktop Applications:**
+- **[Desktop Manager (Python)](https://github.com/smartlegionlab/smart-password-manager-desktop)**
+- **[Desktop Manager (C#)](https://github.com/smartlegionlab/SmartPasswordManagerCsharpDesktop)**
+
+**Other:**
+- **[Web Manager](https://github.com/smartlegionlab/smart-password-manager-web)**
+- **[Android Manager](https://github.com/smartlegionlab/smart-password-manager-android)**
 
 ## License
 
-**[BSD 3-Clause License](LICENSE)**
+**[BSD 3-Clause License](https://github.com/smartlegionlab/smartpasslib-kotlin/blob/master/LICENSE)**
 
 Copyright (©) 2026, [Alexander Suvorov](https://github.com/smartlegionlab)
 
@@ -228,7 +254,5 @@ Copyright (©) 2026, [Alexander Suvorov](https://github.com/smartlegionlab)
 ## Support
 
 - **Issues**: [GitHub Issues](https://github.com/smartlegionlab/smartpasslib-kotlin/issues)
-- **Documentation**: This [README](README.md)
-
----
+- **Documentation**: This [README](https://github.com/smartlegionlab/smartpasslib-kotlin/blob/master/README.md)
 
